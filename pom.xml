@@ -4,9 +4,9 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.apache.oltu</groupId>
-    <artifactId>apache-oltu</artifactId>
-    <version>1.0.3-SNAPSHOT</version>
+    <groupId>cn.zj.ly</groupId>
+    <artifactId>apache-oltu4spring</artifactId>
+    <version>0.1-SNAPSHOT</version>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
