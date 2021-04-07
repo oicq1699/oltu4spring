@@ -22,6 +22,7 @@
 package org.apache.oltu.oauth2.common.utils;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -139,9 +140,17 @@ public final class JSONUtils {
 //        }
 //    }
 
-//    public static Map<String, Object> parseJSON(String jsonBody) {
-//        final Map<String, Object> params = new HashMap<String, Object>();
-//
+    public static Map<String, Object> parseJSON(String jsonBody) {
+        final Map<String, Object> params = new HashMap<String, Object>();
+
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+          return  mapper.readValue(jsonBody,new TypeReference<Map<String,Object>>(){});
+        } catch (JsonProcessingException e) {
+            throw new IllegalArgumentException(format("String '%s' is not a valid JSON object representation",
+                    jsonBody));
+        }
+
 //        StringReader reader = new StringReader(jsonBody);
 //        JsonReader jsonReader = Json.createReader(reader);
 //        JsonStructure structure = jsonReader.read();
@@ -168,7 +177,7 @@ public final class JSONUtils {
 //
 //        jsonReader.close();
 //        return params;
-//    }
+    }
 
 //    private static Object toJavaObject(JsonValue jsonValue) {
 //        Object value = null;
