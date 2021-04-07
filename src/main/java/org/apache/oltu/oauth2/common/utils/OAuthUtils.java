@@ -30,19 +30,13 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.StringTokenizer;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletRequest;
-
-import org.apache.commons.codec.binary.Base64;
+//If your JDK version is smaller than 8
+//import org.apache.commons.codec.binary.Base64;
 import org.apache.oltu.oauth2.common.OAuth;
 import org.apache.oltu.oauth2.common.error.OAuthError;
 import org.apache.oltu.oauth2.common.exception.OAuthProblemException;
@@ -363,7 +357,10 @@ public final class OAuthUtils {
     }
 
     private static String[] decodeBase64EncodedCredentials(String encodedCreds) {
-        String decodedCreds = new String(Base64.decodeBase64(encodedCreds));
+        //If your JDK version is smaller than 8,Use the line down here
+       // String decodedCreds = new String(Base64.decodeBase64(encodedCreds));
+        String decodedCreds = new String(Base64.getDecoder().decode(encodedCreds));
+
         String[] creds = decodedCreds.split(":", 2);
         if (creds.length != 2) {
           return null;
